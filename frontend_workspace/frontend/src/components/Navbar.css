@@ -1,0 +1,40 @@
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.25rem 1.5rem;
+  align-items: center;
+  min-height: 48px;
+  font-size: 1.1rem;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.navbar a, .navbar .btn-logout {
+  color: var(--text-primary);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.navbar a.active, .navbar a:hover, .navbar .btn-logout:hover {
+  background: var(--border-color);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.2em;
+  letter-spacing: 1px;
+}

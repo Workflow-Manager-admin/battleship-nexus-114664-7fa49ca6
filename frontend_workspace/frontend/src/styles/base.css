@@ -1,0 +1,89 @@
+.container {
+  max-width: 520px;
+  margin: 2.5rem auto 0;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(28,28,28,0.18);
+  padding: 2rem 2.5rem;
+}
+
+h2, h4 {
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+.btn {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.btn:hover {
+  background: #1976d2cb;
+}
+.btn-large {
+  padding: 0.8rem 1.6rem;
+  font-size: 1.18rem;
+}
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+input[type="text"], input[type="password"] {
+  padding: 0.7rem;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  width: 100%;
+  box-sizing: border-box;
+}
+.error {
+  color: #e53935;
+  margin-top: 0.5rem;
+}
+.leaderboard {
+  width: 100%;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+.leaderboard th, .leaderboard td {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+}
+
+.game-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+.grids {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.game-status {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background: var(--bg-secondary);
+  margin-top: 1rem;
+  padding: 1.2rem;
+  border-radius: 10px;
+  min-width: 200px;
+}
+
+@media (max-width: 800px) {
+  .container, .game-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .game-container, .grids { flex-direction: column; }
+}

@@ -1,0 +1,34 @@
+.battleship-board {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0.5rem auto;
+  background: var(--border-color);
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(20, 20, 20, 0.08);
+}
+.board-row {
+  display: flex;
+  gap: 2px;
+}
+.board-cell {
+  width: 28px;
+  height: 28px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.board-cell.ship {
+  background: #3b64c0; /* Blue for ships (hidden for opponent) */
+}
+.board-cell.hit {
+  background: #e53935; /* red */
+}
+.board-cell.miss {
+  background: #bdbdbd; /* gray */
+}
+.board-cell:hover {
+  border-color: var(--text-secondary);
+}
