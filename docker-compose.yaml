@@ -1,0 +1,93 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend_workspace/backend
+      dockerfile: Dockerfile
+    container_name: battleship-backend
+    restart: unless-stopped
+    env_file:
+      - ./backend_workspace/backend/.env
+    environment:
+      POSTGRES_URL: postgres://battleship:pass@db:5432/battleshipdb
+      REDIS_URL: redis://redis:6379/0
+      JWT_SECRET: changeme
+      # Add any other vars needed by FastAPI backend
+    ports:
+      - "3001:3001"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - appnet
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3001/ || exit 1"]
+      interval: 15s
+      timeout: 3s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./frontend_workspace/frontend
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_URL: http://localhost:3001
+    container_name: battleship-frontend
+    restart: unless-stopped
+    environment:
+      REACT_APP_API_URL: http://backend:3001
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - appnet
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000"]
+      interval: 15s
+      timeout: 3s
+      retries: 5
+
+  db:
+    image: postgres:15
+    container_name: battleship-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: battleship
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: battleshipdb
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - appnet
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U battleship"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  redis:
+    image: redis:6-alpine
+    container_name: battleship-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - appnet
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  db_data:
+
+networks:
+  appnet:
+    driver: bridge
