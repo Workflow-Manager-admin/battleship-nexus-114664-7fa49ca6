@@ -1,104 +1,362 @@
-/* CSS Variables for Theme Management */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --primary: #1976d2;
+  --secondary: #424242;
+  --accent: #ff9800;
+  --bg: #181a20;
+  --bg-card: #23263a;
+  --text: #fff;
+  --text-secondary: #b0b3be;
+  --border: #31314d;
 }
 
 [data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+  --primary: #1976d2;
+  --secondary: #424242;
+  --accent: #ff9800;
+  --bg: #181a20;
+  --bg-card: #23263a;
+  --text: #fff;
+  --text-secondary: #b0b3be;
+  --border: #31314d;
+}
+
+body, .App {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 .App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  transition: background 0.5s, color 0.5s;
+}
+
+.auth-screen, .lobby-screen, .game-screen, .leaderboard-page, .replay-page {
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+  background: var(--bg);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
 }
 
-.App-link {
+.auth-card {
+  background: var(--bg-card);
+  border-radius: 10px;
+  box-shadow: 0 4px 32px #0003;
+  padding: 32px 32px;
+  max-width: 340px;
+  width: 100%;
+  margin-top: 48px;
+}
+
+.tab-switcher {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.tab-switcher button {
+  background: none;
   color: var(--text-secondary);
-  transition: color 0.3s ease;
-}
-
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 18px;
+  flex: 1;
+  padding: 7px;
+  border-bottom: 2px solid transparent;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 400;
+  transition: all 0.18s;
+}
+.tab-switcher .tab-selected {
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.auth-card input {
+  width: 100%;
+  margin: 10px 0 0;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: 0 1px 2px #0002 inset;
+  font-size: 16px;
+}
+.auth-card .btn-accent {
+  width: 100%;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.error-msg {
+  color: #ff4444;
+  margin: 8px 0 0;
+  font-size: 15px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.lobby-header, .game-header {
+  display: flex;
+  width: 100vw;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  padding: 16px 24px;
+  box-sizing: border-box;
+  font-size: 1.2em;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.user-avatar {
+  background: var(--primary);
+  color: #fff;
+  border-radius: 100%;
+  display: inline-block;
+  width: 28px;
+  text-align: center;
+  height: 28px;
+  line-height: 28px;
+  font-weight: 700;
+  margin-right: 5px;
+  font-size: 1.03em;
+}
+
+footer.footer-lobby {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  background: var(--bg-card);
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 9px 0;
+  font-size: 0.95em;
+}
+
+.lobby-screen h2 {
+  margin-top: 40px;
+  color: var(--primary);
+  font-size: 2em;
+  margin-bottom: 24px;
+  font-weight: 600;
+  text-shadow: 0 2px 6px #0002;
+}
+
+.joinroom {
+  display: flex;
+  gap: 6px;
+}
+.joinroom input {
+  flex: 1;
+  font-size: 15px;
+}
+
+.btn-primary, .btn-secondary, .btn-accent {
+  appearance: none;
+  border-radius: 7px;
+  border: none;
+  padding: 8px 15px;
+  min-width: 95px;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 2px;
+  transition: background 0.16s, color 0.13s;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+.btn-accent {
+  background: var(--accent);
+  color: #000;
+}
+.btn-secondary {
+  background: var(--secondary);
+  color: #fff;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 22px 0;
+  width: 100%;
+}
+.section-label {
+  text-align: center;
+  color: var(--accent);
+  margin-top: 12px;
+  font-size: 1.09em;
+  margin-bottom: 0.2em;
+  font-weight: bold;
+}
+.bship-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 28px);
+  grid-template-rows: repeat(10, 28px);
+  gap: 2px;
+  margin-bottom: 8px;
+  background: var(--border);
+  border-radius: 7px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 13px;
+}
+.bcell {
+  width: 28px;
+  height: 28px;
+  background: var(--bg-card);
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  box-sizing: border-box;
+  transition: background 0.12s;
+  cursor: pointer;
+}
+.bcell.ship {
+  background: #38506b;
+}
+.bcell.hit {
+  background: #be2826;
+  position: relative;
+  z-index: 1;
+}
+.bcell.miss {
+  background: #656573;
+  opacity: 0.7;
+  position: relative;
+  z-index: 1;
+}
+.bcell:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 0;
+}
+
+.placement-controls {
+  margin-top: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.game-body {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  padding: 32px 12px;
+  max-width: 1100px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.board-section {
+  background: var(--bg-card);
+  border-radius: 8px;
+  padding: 18px 26px 18px 26px;
+  box-shadow: 0 2px 10px #0003;
+  margin: 10px;
+  min-width: 330px;
+}
+
+.game-sidebar {
+  min-width: 220px;
+  background: var(--bg-card);
+  border-radius: 8px;
+  padding: 20px 16px;
+  box-shadow: 0 2px 8px #0002;
+  margin-top: 10px;
+  height: fit-content;
+}
+
+.status-panel {
+  color: var(--text-secondary);
+  font-size: 1.06em;
+}
+.status-panel .user-avatar {
+  background: var(--accent);
+  color: #000;
+}
+
+.modal-backdrop {
+  background: #000a;
+  position: fixed;
+  z-index: 1002;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+}
+.modal-card {
+  background: var(--bg-card);
+  border-radius: 14px;
+  padding: 30px 48px;
+  box-shadow: 0 6px 44px #0008;
+  min-width: 270px;
+  text-align: center;
+}
+.modal-card h2 {
+  margin-bottom: 18px;
+  font-size: 1.5em;
+  color: var(--accent);
+}
+
+.leaderboard-page, .replay-page {
+  background: var(--bg);
+  width: 100vw;
+  min-height: 100vh;
+  padding: 20px 0 60px 0;
+}
+
+.leaderboard-table, .replay-table {
+  background: var(--bg-card);
+  color: var(--text);
+  border-radius: 10px;
+  width: 410px;
+  margin: 30px auto;
+  border-spacing: 0;
+  font-size: 1.09em;
+  box-shadow: 0 3px 25px #0003;
+}
+.leaderboard-table th, .replay-table th {
+  color: var(--accent);
+  font-size: 1em;
+  font-weight: 600;
+  background: var(--bg-card);
+  padding: 10px 0;
+  border-bottom: 2px solid var(--border);
+}
+.leaderboard-table td, .replay-table td {
+  text-align: center;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.replay-viewer {
+  text-align: center;
+}
+.replay-boards {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin: 28px 0;
+}
+
+/* Responsive */
+@media (max-width: 1040px) {
+  .game-body {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
-  to {
-    transform: rotate(360deg);
-  }
 }
-
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+@media (max-width: 800px) {
+  .board-section {
+    min-width: 90vw;
+    padding: 10px 8vw;
+    margin: 7px;
+  }
+  .game-sidebar {
+    min-width: 180px;
+    padding: 14px 7vw;
+  }
+  .leaderboard-table, .replay-table {
+    width: 95vw;
   }
 }
